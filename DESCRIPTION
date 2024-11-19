@@ -1,0 +1,12 @@
+Package: HW3LR
+Title: Perform Linear Regression Analysis
+Version: 0.0.0.9000
+Authors@R: 
+    person("Yile", "Zhu", , "first.last@example.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This function performs a linear regression analysis, calculating key metrics such as point estimates, fitted values, residuals, mean squared error (MSE), R-squared, adjusted R-squared, standard errors of coefficients, t-statistics, p-values, F-statistic, degrees of freedom, and diagnostic plots.
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
