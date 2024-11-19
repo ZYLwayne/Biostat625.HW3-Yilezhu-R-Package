@@ -1,0 +1,193 @@
+---
+title: "linear_model_tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{linear_model_tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(HW3LR)
+```
+
+# Linear Regression Package
+
+This R package provides a simple and efficient implementation of linear regression, including the computation of regression coefficients, fitted values, residuals, Mean Squared Error (MSE), R-squared, adjusted R-squared, standard errors of coefficients, t-statistics, p-values, F-statistic, and degrees of freedom. The package also offers diagnostic plots to assess model assumptions.
+
+## Installation
+
+To install this package, clone the repository from GitHub and use `devtools` to load it into R:
+
+\# Install devtools if you haven't already
+
+``` r
+install.packages("devtools")
+```
+
+\# Load your package using devtools
+
+``` r
+devtools::install_github("ZYLwayne/YileZhu-Biostat625-HW3-LinearRegression")
+```
+
+## Functions
+
+### 1. `linear_regression(X, Y)`
+
+**Description**: Fits a linear regression model using Ordinary Least Squares (OLS) and returns an output list containing various regression statistics and diagnostics.
+
+-   **Inputs**:
+
+    -   `X`: A matrix of predictor variables, where the first column is 1s for the intercept.
+
+    -   `Y`: A vector of the response variable.
+
+-   **Output**: A list containing:
+
+    -   `coefficients`: The estimated regression coefficients.
+
+    -   `fitted_values`: The predicted values based on the regression model.
+
+    -   `residuals`: The differences between the actual and fitted values.
+
+    -   `mse`: Mean Squared Error of the model.
+
+    -   `r_squared`: R-squared value, indicating the proportion of variance explained by the model.
+
+    -   `adj_r_squared`: Adjusted R-squared value, accounting for the number of predictors.
+
+    -   `std_errors`: Standard errors of the regression coefficients.
+
+    -   `t_statistics`: t-statistics for the coefficients.
+
+    -   `p_values`: p-values for the significance of the coefficients.
+
+    -   `f_statistic`: F-statistic for the overall significance of the model.
+
+    -   `df1`: Degrees of freedom for the regression.
+
+    -   `df2`: Degrees of freedom for the residuals.
+
+    -   `diagnostic_plots`: Diagnostic plots for model assessment.
+
+### 2. `print_regression_summary(results)`
+
+**Description**: Prints a comprehensive summary of the linear regression output, including coefficients, standard errors, R-squared values, and diagnostic information.
+
+-   **Input**:
+
+    -   `results`: The output list from the `linear_regression` function.
+
+-   **Output**: Printed summary of the regression analysis.
+
+## Usage
+
+Here is an example of how to use the package to perform linear regression and print a summary:
+
+``` r
+# Load your package
+library(HW3LR)
+
+# Load your data
+my_data <- read.csv("path/to/your/test.csv")
+
+# Prepare the data
+Y <- my_data$y  # Response variable
+X <- cbind(1, my_data$x)  # Predictor matrix including the intercept term
+
+# Perform linear regression
+results <- linear_regression(X, Y)
+
+# Print the regression summary
+print_regression_summary(results)
+```
+
+### Explanation
+
+-   `linear_regression(X, Y)`: Computes and returns all relevant regression statistics and diagnostics.
+
+-   `print_regression_summary(results)`: Prints the regression analysis summary in a readable format.
+
+## Output Details
+
+-   **Coefficients**: Estimates for each predictor in the model.
+
+-   **Fitted Values**: Predicted values of the response variable.
+
+-   **Residuals**: Differences between actual and predicted values.
+
+-   **Mean Squared Error (MSE)**: Measure of the model's prediction error.
+
+-   **R-squared**: Proportion of the variance explained by the model.
+
+-   **Adjusted R-squared**: Adjusted measure of R-squared accounting for predictors.
+
+-   **Standard Errors**: Indicates the variability of the coefficient estimates.
+
+-   **t-statistics and p-values**: Tests for the significance of each coefficient.
+
+-   **F-statistic**: Tests the overall significance of the model.
+
+-   **Degrees of Freedom**: Used for calculating statistical tests.
+
+## Conclusion
+
+This R package offers a user-friendly way to execute linear regression in R, replete with diagnostic charts to help evaluate the model and thorough statistical output. Perform regression analysis using the functions given, then print thorough summaries of your findings.
+
+# Comparison Between HW3LR Package and Traditional `lm()` Function
+
+Verify the correctness and accuracy of the custom linear regression R package: we will compare its results with those produced by R's built-in lm() function. This comparison will help ensure that our implementation meets expectations and produces reliable output.
+
+## Methodology
+
+1.  **Objective**: To compare the outputs of the custom `linear_regression` function with the outputs of the traditional `lm()` function in R, using the same data set.
+
+2.  **Metrics for Comparison**:
+
+    -   Regression coefficients
+
+    -   Fitted values
+
+    -   Residuals
+
+    -   R-squared and Adjusted R-squared values
+
+    -   Mean Squared Error (MSE)
+
+    -   Standard errors of the coefficients
+
+    -   t-statistics and p-values
+
+## Running the Models
+
+### 1. Using the Custom `linear_regression` Function
+
+``` {.r .R}
+# Perform linear regression using the HW3LR package
+results <- linear_regression(X, Y)
+print_regression_summary(results_custom)  # Print the summary from the function
+```
+
+### 2. Using the Traditional `lm()` Function
+
+``` {.r .R}
+# Perform linear regression using the built-in lm() function
+model_lm <- lm(y ~ x, data = my_data)
+summary_lm <- summary(model_lm)  # Get the summary of the lm() model
+```
+
+## Results and Observations
+
+1.  **Correctness**: The regression coefficients, R-squared values, and residuals from our custom function should closely match those produced by `lm()`. Small differences may occur due to rounding, but the overall values should be nearly identical.
+
+2.  **Accuracy**: If all key metrics (coefficients, R-squared, MSE, etc.) are consistent with `lm()`, it confirms that our implementation is accurate and reliable.
+
+3.  **Diagnostic Plots**: While the built-in `lm()` function also provides diagnostic plots using `plot(model_lm)`, our package offers a custom implementation of these plots to give more flexibility and customization.
