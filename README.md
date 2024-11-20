@@ -177,6 +177,6 @@ To ensure that your package functions correctly, you can use the `testthat` fram
     devtools::test()
     ```
 
-## License {#license}
+## License 
 
 This package is licensed under the MIT License.
