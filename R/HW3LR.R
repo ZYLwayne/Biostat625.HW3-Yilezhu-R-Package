@@ -155,5 +155,3 @@ print_regression_summary <- function(results) {
   cat("=========================================\n")
 }
 
-
-

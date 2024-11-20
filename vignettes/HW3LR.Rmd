@@ -1,5 +1,5 @@
 ---
-title: "linear_model_tutorial"
+title: "HW3LR_tutorial"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{linear_model_tutorial}
